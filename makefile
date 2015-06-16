@@ -1,14 +1,22 @@
+# Specify compiler
+COMP = clang++ -std=c++1y -O2
+
+# Specify target
 all: neural_crypto
 
+# Build executable
 neural_crypto: tpm.o neural_crypto.o
-	g++ tpm.o neural_crypto.o -std=c++11 -o neural_crypto
+	$(COMP) tpm.o neural_crypto.o -o neural_crypto
 
+# Build neurl crypto object
 neural_crypto.o: neural_crypto.cpp
-	g++ -c neural_crypto.cpp -std=c++11 -O3
+	$(COMP) -c neural_crypto.cpp
 
+# Build tree parity machine object
 tpm.o: lib/tpm.cpp
-	g++ -c lib/tpm.cpp -std=c++11 -O3
+	$(COMP) -c lib/tpm.cpp
 
+# Clean build
 clean:
 	rm *.o neural_crypto
 
